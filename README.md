@@ -17,6 +17,8 @@ Kraken
 Poloniex
 Yobit
 
+Проект создан на основе knowm/XChange https://github.com/knowm/XChange
+
 Контакты разработчика:
 Telegram https://t.me/epiccode
 
