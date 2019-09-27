@@ -3,8 +3,10 @@ package com.md.cryptoarbitrage.globals;
 
 import com.md.cryptoarbitrage.entity.ExchangePairPrices;
 import com.md.cryptoarbitrage.workers.TickerMaster;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.chart.XYChart;
+import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -14,7 +16,17 @@ import java.time.format.DateTimeFormatter;
 import static java.lang.Thread.sleep;
 
 public class GlobalCore {
+    public static Stage globalstage;
     private static boolean applicationStarted = false;
+    private static boolean quitall  = false;
+
+    public static boolean isQuitall() {
+        return quitall;
+    }
+
+    public static void setQuitall(boolean quitall) {
+        GlobalCore.quitall = quitall;
+    }
 
     public static boolean isApplicationStart() {
         return applicationStarted;
@@ -34,8 +46,8 @@ public class GlobalCore {
     }
 
     private synchronized static void CalculatePercentSystem() {
-        //Platform.runLater(() ->
-        // {
+        Platform.runLater(() ->
+         {
         BigDecimal min = BigDecimal.valueOf(2000000000);
         BigDecimal max = BigDecimal.valueOf(0);
         ExchangePairPrices minimal = null;
@@ -82,7 +94,7 @@ public class GlobalCore {
         }
         // GlobalStageModel.globalGraphList.add(new GraphTimelineElement(LocalDateTime.now().format(formatter).toString(),maxpercent));
 
-        // });
+         });
     }
 
 
@@ -92,7 +104,7 @@ public class GlobalCore {
             public Void call() throws InterruptedException {
 
                 while (true) {
-                    if (isCancelled()) {
+                    if (GlobalCore.isQuitall()) {
                         break;
                     }
                     if (GlobalCore.isApplicationStart()) {

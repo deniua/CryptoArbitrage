@@ -28,13 +28,13 @@ public class App extends Application {
     }
 
     public void start(Stage stage) {
-
+        GlobalCore.globalstage=stage;
         try {
 
             Parent root = FXMLLoader.load(getClass()
                     .getResource("/view/main.fxml"));
 
-            stage.setTitle("Межбиржевой арбитраж");
+            stage.setTitle("Межбиржевой арбитраж(мониторинг)");
             stage.setScene(new Scene(root));
             stage.show();
 

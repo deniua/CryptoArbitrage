@@ -109,6 +109,8 @@ public class MainAppController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
 
+
+        GlobalCore.globalstage.setOnHiding( event -> {quitAction();} );
         initFields();
 
         ChoiceExchange.setItems(GlobalStageModel.Exchanges);
@@ -166,22 +168,30 @@ public class MainAppController implements Initializable {
 
     }
 
-    public void BtnStartOnAction(ActionEvent actionEvent) {
+    private void startAction(){
         GlobalCore.logicStart();
         GenStatusLabel.setText("Система работает.");
         svetofor.setImage(new Image("/images/Green.png"));
         try {
             GlobalStageModel.profitlimit = Double.parseDouble(textfieldminprofit.getCharacters().toString());
         } catch (NumberFormatException e) {
-           // e.printStackTrace();
+            // e.printStackTrace();
             GlobalStageModel.profitlimit = 0;
         }
     }
 
-    public void BtnStopOnAction(ActionEvent actionEvent) {
+    public void BtnStartOnAction(ActionEvent actionEvent) {
+        startAction();
+    }
+
+    private void stopAction(){
         GlobalCore.setApplicationStart(false);
         GenStatusLabel.setText("Остановлен. Нажмите старт!");
         svetofor.setImage(new Image("/images/Red.png"));
+    }
+
+    public void BtnStopOnAction(ActionEvent actionEvent) {
+        stopAction();
     }
 
 
@@ -228,9 +238,9 @@ public class MainAppController implements Initializable {
                 GenTableView.setItems(GlobalStageModel.TableViewlist);
                 GenTableView.refresh();
 
-                if (GlobalCore.isApplicationStart()) {
+              if(GlobalCore.isQuitall()) timer.cancel();
 
-                }
+
 
             }
         };
@@ -240,5 +250,33 @@ public class MainAppController implements Initializable {
 
     public void btnclearchartact(ActionEvent actionEvent) {
         GlobalStageModel.globalseria.clear();
+    }
+
+    public void MenuBtnStartAction(ActionEvent actionEvent) {
+        startAction();
+    }
+
+    public void MenuBtnStopAction(ActionEvent actionEvent) {
+        stopAction();
+    }
+
+    public void MenuBtnQuitAction(ActionEvent actionEvent) {
+        quitAction();
+    }
+
+    private void quitAction() {
+        GlobalCore.setApplicationStart(false);
+        GlobalCore.setQuitall(true);
+        GlobalCore.globalstage.close();
+
+    }
+
+    public void MenuBtnAboutAction(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("О программе");
+        alert.setHeaderText("Разработано Epic code 2019(c)");
+        String s ="По вопросам модернизации или создания полноценного рабочего торгового терминала -  пишите в Telegram https://t.me/epiccode";
+        alert.setContentText(s);
+        alert.show();
     }
 }
