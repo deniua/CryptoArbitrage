@@ -6,6 +6,7 @@ import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 
 import java.io.IOException;
+import java.util.Date;
 
 public class TickerWorker implements Runnable {
 
@@ -56,7 +57,7 @@ public class TickerWorker implements Runnable {
             Ticker nr = marketDataService.getTicker(linktoTableRowEPP.getPair());
             linktoTableRowEPP.setAsk(nr.getAsk());
             linktoTableRowEPP.setBid(nr.getBid());
-            //linktoTableRowEPP.setFlagofupdates("*");
+            linktoTableRowEPP.setTimestamp(new Date().getTime());
 
         } catch (IOException e) {
             e.printStackTrace();

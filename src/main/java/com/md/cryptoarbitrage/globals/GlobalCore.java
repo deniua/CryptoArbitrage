@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import static java.lang.Thread.sleep;
 
@@ -39,7 +40,7 @@ public class GlobalCore {
     public static void logicStart() {
 
         setApplicationStart(true);
-        TickerMaster tm = new TickerMaster(2000);
+        TickerMaster tm = new TickerMaster(1500);
         // setTimerRefresh();
         SetJFXTask();
 
@@ -53,8 +54,12 @@ public class GlobalCore {
         ExchangePairPrices minimal = null;
         ExchangePairPrices maximal = null;
         double maxpercent = 0.0d;
+        long datats = 0;
 
         for (ExchangePairPrices epp : GlobalStageModel.TableViewlist) {
+            datats = new Date().getTime();
+            if ((datats - epp.getTimestamp())>2500) {continue;};
+
             if (epp.getBid().compareTo(max) == 1) {
                 max = epp.getBid();
                 maximal = epp;
@@ -72,6 +77,13 @@ public class GlobalCore {
 
 
         for (ExchangePairPrices epp : GlobalStageModel.TableViewlist) {
+            datats = new Date().getTime();
+            if ((datats - epp.getTimestamp())>2500) {
+                epp.setMin(BigDecimal.valueOf(0));
+                epp.setMax(BigDecimal.valueOf(0));
+                epp.setPercent(BigDecimal.valueOf(0));
+                continue;};
+
             epp.setMin(min);
             epp.setMax(max);
             try {

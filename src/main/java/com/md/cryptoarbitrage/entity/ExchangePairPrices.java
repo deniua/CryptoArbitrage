@@ -1,6 +1,5 @@
 package com.md.cryptoarbitrage.entity;
 
-import com.md.cryptoarbitrage.globals.observable.BigDecimalObservable;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -23,6 +22,15 @@ public class ExchangePairPrices {
     private BigDecimal max ;
     private boolean isminimal;
     private boolean ismaximal;
+    private long timestamp;
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public ImageView getLogo() {
         return logo;
@@ -110,6 +118,7 @@ public class ExchangePairPrices {
         bid = BigDecimal.valueOf(0);
         percent = BigDecimal.valueOf(0);
         this.logo = (new ImageView(new Image("/images/"+name+".png")));
+
 
     }
 
