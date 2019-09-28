@@ -36,10 +36,10 @@ public class App extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/main.fxml"));
             Parent root = loader.load();
-
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/icon16.png")));
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/icon32.png")));
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/icon64.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo8.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo16.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo32.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo64.png")));
 
 
 
