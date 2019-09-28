@@ -134,7 +134,7 @@ public class MainAppController implements Initializable {
                 }
             }
         };
-        // Selected Item Changed.
+
         ChoiceExchange.getSelectionModel().selectedItemProperty().addListener(changeListener);
 
         ListChangeListener<ExchangePairPrices> listlistener = new ListChangeListener<ExchangePairPrices>() {

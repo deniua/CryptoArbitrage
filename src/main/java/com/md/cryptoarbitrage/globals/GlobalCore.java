@@ -41,7 +41,6 @@ public class GlobalCore {
 
         setApplicationStart(true);
         TickerMaster tm = new TickerMaster(1500);
-        // setTimerRefresh();
         SetJFXTask();
 
     }
