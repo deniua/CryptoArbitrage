@@ -26,7 +26,7 @@ public class GlobalStageModel {
 
     public static ObservableList<String> Exchanges =
             FXCollections.observableArrayList("Binance", "Bitfinex", "Bittrex", "Bitmex", "Bitstamp",
-                    "CexIO", "HitBTC", "Huobi", "Kraken", "Poloniex", "Yobit");
+                    "CexIO", "HitBTC", "Huobi", "Kraken", "Poloniex", "Yobit","CoinBene");
 
     // methods
 

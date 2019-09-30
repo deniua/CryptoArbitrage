@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static java.lang.Thread.sleep;
@@ -64,7 +65,7 @@ public class GlobalCore {
                     if (GlobalCore.isApplicationStart()) {
                         CalculatePercentSystem();
                     }
-                    sleep(1500);
+                    sleep(100);
                 }
                 return null;
             }
@@ -90,16 +91,24 @@ public class GlobalCore {
                 .stream()
                 .filter(x -> ((finalDatats - x.getTimestamp()) < 2500))
                 .min(Comparator.comparing(ExchangePairPrices::getAsk));
+        try {
+            min = minimalstream.get().getAsk();
+            minimalstream.get().setMin(min);
+        } catch (NoSuchElementException e) {
+            min = BigDecimal.valueOf(0);
+        }
 
-        min = minimalstream.get().getAsk();
-        minimalstream.get().setMin(min);
 
         Optional<ExchangePairPrices> maximalstream = GlobalStageModel.TableViewlist
                 .stream()
                 .filter(x -> ((finalDatats - x.getTimestamp()) < 2500))
                 .max(Comparator.comparing(ExchangePairPrices::getBid));
+        try {
         max = maximalstream.get().getBid();
         maximalstream.get().setMax(max);
+        } catch (NoSuchElementException e) {
+            max = BigDecimal.valueOf(0);
+        }
 
         for (ExchangePairPrices epp : GlobalStageModel.TableViewlist) {
             datats = new Date().getTime();
@@ -128,8 +137,11 @@ public class GlobalCore {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String localtime = LocalDateTime.now().format(formatter).toString();
+        localtime+="\n ("+minimalstream.get().getName()+" : "+maximalstream.get().getName()+")";
         if (maxpercent > GlobalStageModel.profitlimit) {
             GlobalStageModel.globalseria.add(new XYChart.Data<String, Double>(localtime, maxpercent));
         }
+
+
     }
 }

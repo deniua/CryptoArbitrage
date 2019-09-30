@@ -23,6 +23,15 @@ public class ExchangePairPrices {
     private boolean isminimal;
     private boolean ismaximal;
     private long timestamp;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public long getTimestamp() {
         return timestamp;
@@ -118,8 +127,7 @@ public class ExchangePairPrices {
         bid = BigDecimal.valueOf(0);
         percent = BigDecimal.valueOf(0);
         this.logo = (new ImageView(new Image("/images/"+name+".png")));
-
-
+        this.name=name;
     }
 
 
