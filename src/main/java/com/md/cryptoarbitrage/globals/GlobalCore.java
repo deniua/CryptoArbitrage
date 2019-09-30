@@ -97,7 +97,7 @@ public class GlobalCore {
         Optional<ExchangePairPrices> maximalstream = GlobalStageModel.TableViewlist
                 .stream()
                 .filter(x -> ((finalDatats - x.getTimestamp()) < 2500))
-                .min(Comparator.comparing(ExchangePairPrices::getBid));
+                .max(Comparator.comparing(ExchangePairPrices::getBid));
         max = maximalstream.get().getBid();
         maximalstream.get().setMax(max);
 
