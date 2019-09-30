@@ -26,7 +26,8 @@ public class GlobalStageModel {
 
     public static ObservableList<String> Exchanges =
             FXCollections.observableArrayList("Binance", "Bitfinex", "Bittrex", "Bitmex", "Bitstamp",
-                    "CexIO", "HitBTC", "Huobi", "Kraken", "Poloniex", "Yobit","CoinBene");
+                    "CexIO", "HitBTC", "Huobi", "Kraken", "Poloniex", "Yobit","CoinBene","CoinBase","BiBox");
+    //"BitBay" ,"CoinEgg"
 
     // methods
 
@@ -98,6 +99,26 @@ public class GlobalStageModel {
         if ("CoinBene" == exchangestring) {
 
             return CoinBeneClFactory.createExchange();
+        }
+
+        if ("BiBox" == exchangestring) {
+
+            return BiBoxClFactory.createExchange();
+        }
+
+        if ("CoinBase" == exchangestring) {
+
+            return CoinBaseClFactory.createExchange();
+        }
+
+        if ("BitBay" == exchangestring) {
+
+            return BitBayClFactory.createExchange();
+        }
+
+        if ("CoinEgg" == exchangestring) {
+
+            return CoinEggClFactory.createExchange();
         }
 
         return null;
