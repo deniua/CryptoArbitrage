@@ -134,13 +134,15 @@ public class GlobalCore {
 
 
         }
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String localtime = LocalDateTime.now().format(formatter).toString();
-        localtime+="\n ("+minimalstream.get().getName()+" : "+maximalstream.get().getName()+")";
-        if (maxpercent > GlobalStageModel.profitlimit) {
-            GlobalStageModel.globalseria.add(new XYChart.Data<String, Double>(localtime, maxpercent));
-        }
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String localtime = LocalDateTime.now().format(formatter).toString();
+            localtime += "\n (" + minimalstream.get().getName() + " : " + maximalstream.get().getName() + ")";
+            localtime += "\n buy " + min.toString() + " \n sell " + max.toString() + "";
+            if (maxpercent > GlobalStageModel.profitlimit) {
+                GlobalStageModel.globalseria.add(new XYChart.Data<String, Double>(localtime, maxpercent));
+            }
+        } catch (NoSuchElementException e) {}
 
 
     }
