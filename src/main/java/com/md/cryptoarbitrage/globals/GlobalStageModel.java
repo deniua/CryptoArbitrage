@@ -95,6 +95,11 @@ public class GlobalStageModel {
             return YobitClFactory.createExchange();
         }
 
+        if ("CoinBene" == exchangestring) {
+
+            return CoinBeneClFactory.createExchange();
+        }
+
         return null;
     }
 
